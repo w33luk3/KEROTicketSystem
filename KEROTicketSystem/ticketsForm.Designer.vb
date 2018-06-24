@@ -22,7 +22,7 @@ Partial Class ticketsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.ticketsDataGridView = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
@@ -32,6 +32,7 @@ Partial Class ticketsForm
         Me.statusIDNameComboBox = New System.Windows.Forms.ComboBox()
         Me.tagNameComboBox = New System.Windows.Forms.ComboBox()
         Me.tagIDComboBox = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.ticketsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -61,8 +62,8 @@ Partial Class ticketsForm
         Me.ticketsDataGridView.AllowUserToAddRows = False
         Me.ticketsDataGridView.AllowUserToDeleteRows = False
         Me.ticketsDataGridView.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.ticketsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.ticketsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
         Me.ticketsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ticketsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.ticketsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
@@ -88,6 +89,7 @@ Partial Class ticketsForm
         Me.TableLayoutPanel2.Controls.Add(Me.statusIDNameComboBox, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.tagNameComboBox, 2, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.tagIDComboBox, 2, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label1, 0, 2)
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(8, 292)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
@@ -145,6 +147,15 @@ Partial Class ticketsForm
         Me.tagIDComboBox.Size = New System.Drawing.Size(188, 21)
         Me.tagIDComboBox.TabIndex = 57
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(3, 47)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 58
+        Me.Label1.Text = "Label1"
+        '
         'ticketsForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -156,6 +167,7 @@ Partial Class ticketsForm
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.ticketsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -169,4 +181,5 @@ Partial Class ticketsForm
     Friend WithEvents statusIDNameComboBox As ComboBox
     Friend WithEvents tagNameComboBox As ComboBox
     Friend WithEvents tagIDComboBox As ComboBox
+    Friend WithEvents Label1 As Label
 End Class

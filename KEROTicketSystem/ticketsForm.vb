@@ -1,4 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Configuration
+Imports System.Collections.Specialized
 
 Public Class ticketsForm
     Private da As MySqlDataAdapter
@@ -26,7 +28,7 @@ Public Class ticketsForm
         GetAgents()
         GetStatus()
         GetTags()
-
+        GetLastTicket()
     End Sub
 
     Private Sub ConnectDatabase()
@@ -49,7 +51,7 @@ Public Class ticketsForm
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor                'display wait cursor when loading
             'sql query
 
-            sql = "Select ticket_id as '#', ticket_email as 'Requester', ticket_title as 'Subject', ticket_date as 'Requested' From wp_wsdesk_tickets"
+            sql = "SELECT * From wp_wsdesk_tickets"
 
             da = New MySqlDataAdapter(sql, conn)                    'make new dataAdapter (with sql query, and connection string)
             'ConnectDatabase()                                                       'connect to DB
@@ -236,6 +238,46 @@ Public Class ticketsForm
     Private Sub agentNameComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles agentNameComboBox.SelectedIndexChanged
         agentIDComboBox.SelectedIndex = agentNameComboBox.SelectedIndex
         Dim tempagentID As String = agentIDComboBox.Text
+        Label1.Text = "a:1:{i:0:d:1:" & tempagentID & ":}"
+
+
+        Try
+            Dim result As New ArrayList()
+
+            ' Set the connection string in the Solutions Explorer/Properties/Settings object (double-click)
+            Using cmd = New MySqlCommand("SELECT * FROM wp_wsdesk_ticketsmeta WHERE meta_value like '" & Label1.Text & "' ", conn)
+
+                Try
+                    Dim dr = cmd.ExecuteReader()
+                    While dr.Read()
+
+                        Dim dict As New Dictionary(Of String, Object)
+                        For count As Integer = 0 To (dr.FieldCount - 1)
+                            dict.Add(dr.GetName(count), dr(count))
+                        Next
+
+                        ' Add the dictionary to the ArrayList
+                        result.Add(dict)
+
+
+                    End While
+
+                    dr.Close()  ' close datareader
+                    dr.Dispose()
+
+                    For Each dat As Dictionary(Of String, Object) In result
+                        Dim agentTicketID As String =
+                        statusIDNameComboBox.Items.Add(dat(("slug")))
+                    Next
+
+                Catch ex As MySqlException
+
+                    MessageBox.Show("There was an error accessing your data. DETAIL: " & ex.ToString())
+                End Try
+            End Using
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
     End Sub
 
@@ -248,6 +290,37 @@ Public Class ticketsForm
     Private Sub statusNameComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles statusNameComboBox.SelectedIndexChanged
         statusIDNameComboBox.SelectedIndex = statusNameComboBox.SelectedIndex
         Dim tempstatusID As String = statusIDNameComboBox.Text
+
+    End Sub
+
+    Private Sub ticketsDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles ticketsDataGridView.CellContentClick
+
+    End Sub
+
+    Private Sub GetLastTicket()
+        Dim tempTicket As Integer
+        Try
+            Dim cmd As New MySqlCommand("SELECT MAX(ticket_id) From wp_wsdesk_tickets", conn)
+            Dim myreader As MySqlDataReader
+            myreader = cmd.ExecuteReader()
+            myreader.Read()
+            If myreader.HasRows Then
+                tempTicket = (myreader.Item("MAX(ticket_id)"))
+
+
+            End If
+            myreader.Close()
+            myreader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
+        My.Settings.LastTicket = tempTicket
+        My.Settings.Save()
+
+    End Sub
+
+    Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
 
     End Sub
 End Class
