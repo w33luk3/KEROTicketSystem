@@ -11,9 +11,22 @@ Public Class ticketsForm
 
     Public connString As String
 
-    Private Sub ticketsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
         connString = My.Settings.ConnString
+    End Sub
+
+    Private Sub ticketsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         LoadData()
+        GetAgents()
+        GetStatus()
+        GetTags()
+
     End Sub
 
     Private Sub ConnectDatabase()
@@ -56,21 +69,124 @@ Public Class ticketsForm
         Catch ex As Exception
         End Try
     End Sub
-    Public Sub GetStatus()
-        'Try
-        '    ConnectDatabase()
-        '    Dim cmd As New MySqlCommand("SELECT * FROM engineer WHERE Eng_ID = '" & EngineerID & "'", conn)
-        '    Dim myreader As MySqlDataReader
-        '    myreader = cmd.ExecuteReader()
-        '    While myreader.Read
-        '        engNameTextBox.Text = (myreader("Eng_Name"))
-        '        engBillRateTextBox.Text = (myreader("Eng_BillRate"))
-        '    End While
-        '    myreader.Close()
+    Public Sub GetAgents()
+        Try
+            Dim result As New ArrayList()
 
-        'Catch ex As Exception
-        '    MessageBox.Show(ex.Message)
-        'End Try
+            ' Set the connection string in the Solutions Explorer/Properties/Settings object (double-click)
+            Using cmd = New MySqlCommand("SELECT * FROM wp_users", conn)
+
+                Try
+                    Dim dr = cmd.ExecuteReader()
+                    While dr.Read()
+
+                        Dim dict As New Dictionary(Of String, Object)
+                        For count As Integer = 0 To (dr.FieldCount - 1)
+                            dict.Add(dr.GetName(count), dr(count))
+                        Next
+
+                        ' Add the dictionary to the ArrayList
+                        result.Add(dict)
+
+
+                    End While
+
+                    dr.Close()  ' close datareader
+                    dr.Dispose()
+
+                    For Each dat As Dictionary(Of String, Object) In result
+                        agentNameComboBox.Items.Add(dat("user_login"))
+                        agentIDComboBox.Items.Add(dat(("ID")))
+                    Next
+
+                Catch ex As MySqlException
+
+                    MessageBox.Show("There was an error accessing your data. DETAIL: " & ex.ToString())
+                End Try
+            End Using
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
+    End Sub
+    Public Sub GetTags()
+        Try
+            Dim result As New ArrayList()
+
+            ' Set the connection string in the Solutions Explorer/Properties/Settings object (double-click)
+            Using cmd = New MySqlCommand("SELECT * FROM wp_wsdesk_settings WHERE type = 'tag'", conn)
+
+                Try
+                    Dim dr = cmd.ExecuteReader()
+                    While dr.Read()
+
+                        Dim dict As New Dictionary(Of String, Object)
+                        For count As Integer = 0 To (dr.FieldCount - 1)
+                            dict.Add(dr.GetName(count), dr(count))
+                        Next
+
+                        ' Add the dictionary to the ArrayList
+                        result.Add(dict)
+
+
+                    End While
+
+                    dr.Close()  ' close datareader
+                    dr.Dispose()
+
+                    For Each dat As Dictionary(Of String, Object) In result
+                        tagNameComboBox.Items.Add(dat("title"))
+                        tagIDComboBox.Items.Add(dat(("slug")))
+                    Next
+
+                Catch ex As MySqlException
+
+                    MessageBox.Show("There was an error accessing your data. DETAIL: " & ex.ToString())
+                End Try
+            End Using
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
+    End Sub
+    Public Sub GetStatus()
+        Try
+            Dim result As New ArrayList()
+
+            ' Set the connection string in the Solutions Explorer/Properties/Settings object (double-click)
+            Using cmd = New MySqlCommand("SELECT * FROM wp_wsdesk_settings WHERE type = 'label' ", conn)
+
+                Try
+                    Dim dr = cmd.ExecuteReader()
+                    While dr.Read()
+
+                        Dim dict As New Dictionary(Of String, Object)
+                        For count As Integer = 0 To (dr.FieldCount - 1)
+                            dict.Add(dr.GetName(count), dr(count))
+                        Next
+
+                        ' Add the dictionary to the ArrayList
+                        result.Add(dict)
+
+
+                    End While
+
+                    dr.Close()  ' close datareader
+                    dr.Dispose()
+
+                    For Each dat As Dictionary(Of String, Object) In result
+                        statusNameComboBox.Items.Add(dat("title"))
+                        statusIDNameComboBox.Items.Add(dat(("slug")))
+                    Next
+
+                Catch ex As MySqlException
+
+                    MessageBox.Show("There was an error accessing your data. DETAIL: " & ex.ToString())
+                End Try
+            End Using
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
     End Sub
     Private Sub UpdateLabels()
@@ -117,4 +233,21 @@ Public Class ticketsForm
 
     End Sub
 
+    Private Sub agentNameComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles agentNameComboBox.SelectedIndexChanged
+        agentIDComboBox.SelectedIndex = agentNameComboBox.SelectedIndex
+        Dim tempagentID As String = agentIDComboBox.Text
+
+    End Sub
+
+    Private Sub tagNameComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tagNameComboBox.SelectedIndexChanged
+        tagIDComboBox.SelectedIndex = tagNameComboBox.SelectedIndex
+        Dim temptagID As String = tagIDComboBox.Text
+
+    End Sub
+
+    Private Sub statusNameComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles statusNameComboBox.SelectedIndexChanged
+        statusIDNameComboBox.SelectedIndex = statusNameComboBox.SelectedIndex
+        Dim tempstatusID As String = statusIDNameComboBox.Text
+
+    End Sub
 End Class
