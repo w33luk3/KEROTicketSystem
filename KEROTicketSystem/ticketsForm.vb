@@ -33,7 +33,7 @@ Public Class ticketsForm
         GetTags()
         GetLastTicket()
 
-        iCount = 0
+
         checkTicketsTimer.Enabled = True
 
     End Sub

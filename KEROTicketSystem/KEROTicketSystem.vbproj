@@ -90,6 +90,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cashCountForm.Designer.vb">
+      <DependentUpon>cashCountForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="cashCountForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="editTicketForm.Designer.vb">
       <DependentUpon>editTicketForm.vb</DependentUpon>
     </Compile>
@@ -132,6 +138,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="cashCountForm.resx">
+      <DependentUpon>cashCountForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="editTicketForm.resx">
       <DependentUpon>editTicketForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +225,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\images\Paper Money_96px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

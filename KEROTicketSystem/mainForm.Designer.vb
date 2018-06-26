@@ -28,6 +28,14 @@ Partial Class mainForm
         Me.chatLabel = New System.Windows.Forms.Label()
         Me.ticketLabel = New System.Windows.Forms.Label()
         Me.settingsLabel = New System.Windows.Forms.Label()
+        Me.checkTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.flashTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.calcLabel = New System.Windows.Forms.Label()
+        Me.cashCountLabel = New System.Windows.Forms.Label()
+        Me.cashCountIconPictureBox = New System.Windows.Forms.PictureBox()
+        Me.cashCountPictureBox = New System.Windows.Forms.PictureBox()
+        Me.calcIconPictureBox = New System.Windows.Forms.PictureBox()
+        Me.calcPictureBox = New System.Windows.Forms.PictureBox()
         Me.settingsIconPictureBox = New System.Windows.Forms.PictureBox()
         Me.settingsPictureBox = New System.Windows.Forms.PictureBox()
         Me.closePictureBox = New System.Windows.Forms.PictureBox()
@@ -37,6 +45,10 @@ Partial Class mainForm
         Me.pinIconPictureBox = New System.Windows.Forms.PictureBox()
         Me.chatPictureBox = New System.Windows.Forms.PictureBox()
         Me.ticketPictureBox = New System.Windows.Forms.PictureBox()
+        CType(Me.cashCountIconPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cashCountPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.calcIconPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.calcPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.settingsIconPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.settingsPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.closePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,11 +98,85 @@ Partial Class mainForm
         Me.settingsLabel.BackColor = System.Drawing.Color.White
         Me.settingsLabel.Font = New System.Drawing.Font("Gotham Light", 9.749999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.settingsLabel.ForeColor = System.Drawing.Color.Black
-        Me.settingsLabel.Location = New System.Drawing.Point(32, 103)
+        Me.settingsLabel.Location = New System.Drawing.Point(32, 158)
         Me.settingsLabel.Name = "settingsLabel"
         Me.settingsLabel.Size = New System.Drawing.Size(59, 15)
         Me.settingsLabel.TabIndex = 88
         Me.settingsLabel.Text = "Settings"
+        '
+        'checkTimer
+        '
+        Me.checkTimer.Interval = 250
+        '
+        'flashTimer
+        '
+        Me.flashTimer.Interval = 500
+        '
+        'calcLabel
+        '
+        Me.calcLabel.AutoSize = True
+        Me.calcLabel.BackColor = System.Drawing.Color.White
+        Me.calcLabel.Font = New System.Drawing.Font("Gotham Light", 9.749999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.calcLabel.ForeColor = System.Drawing.Color.Black
+        Me.calcLabel.Location = New System.Drawing.Point(32, 103)
+        Me.calcLabel.Name = "calcLabel"
+        Me.calcLabel.Size = New System.Drawing.Size(87, 15)
+        Me.calcLabel.TabIndex = 91
+        Me.calcLabel.Text = "Costing Calc"
+        '
+        'cashCountLabel
+        '
+        Me.cashCountLabel.AutoSize = True
+        Me.cashCountLabel.BackColor = System.Drawing.Color.White
+        Me.cashCountLabel.Font = New System.Drawing.Font("Gotham Light", 9.749999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cashCountLabel.ForeColor = System.Drawing.Color.Black
+        Me.cashCountLabel.Location = New System.Drawing.Point(32, 127)
+        Me.cashCountLabel.Name = "cashCountLabel"
+        Me.cashCountLabel.Size = New System.Drawing.Size(81, 15)
+        Me.cashCountLabel.TabIndex = 94
+        Me.cashCountLabel.Text = "Cash Count"
+        '
+        'cashCountIconPictureBox
+        '
+        Me.cashCountIconPictureBox.BackColor = System.Drawing.Color.White
+        Me.cashCountIconPictureBox.BackgroundImage = Global.KEROTicketSystem.My.Resources.Resources.Paper_Money_96px
+        Me.cashCountIconPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.cashCountIconPictureBox.Enabled = False
+        Me.cashCountIconPictureBox.Location = New System.Drawing.Point(2, 123)
+        Me.cashCountIconPictureBox.Name = "cashCountIconPictureBox"
+        Me.cashCountIconPictureBox.Size = New System.Drawing.Size(25, 25)
+        Me.cashCountIconPictureBox.TabIndex = 95
+        Me.cashCountIconPictureBox.TabStop = False
+        '
+        'cashCountPictureBox
+        '
+        Me.cashCountPictureBox.BackColor = System.Drawing.Color.White
+        Me.cashCountPictureBox.Location = New System.Drawing.Point(2, 123)
+        Me.cashCountPictureBox.Name = "cashCountPictureBox"
+        Me.cashCountPictureBox.Size = New System.Drawing.Size(176, 25)
+        Me.cashCountPictureBox.TabIndex = 93
+        Me.cashCountPictureBox.TabStop = False
+        '
+        'calcIconPictureBox
+        '
+        Me.calcIconPictureBox.BackColor = System.Drawing.Color.White
+        Me.calcIconPictureBox.BackgroundImage = Global.KEROTicketSystem.My.Resources.Resources.Calculator_96px
+        Me.calcIconPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.calcIconPictureBox.Enabled = False
+        Me.calcIconPictureBox.Location = New System.Drawing.Point(2, 99)
+        Me.calcIconPictureBox.Name = "calcIconPictureBox"
+        Me.calcIconPictureBox.Size = New System.Drawing.Size(25, 25)
+        Me.calcIconPictureBox.TabIndex = 92
+        Me.calcIconPictureBox.TabStop = False
+        '
+        'calcPictureBox
+        '
+        Me.calcPictureBox.BackColor = System.Drawing.Color.White
+        Me.calcPictureBox.Location = New System.Drawing.Point(2, 99)
+        Me.calcPictureBox.Name = "calcPictureBox"
+        Me.calcPictureBox.Size = New System.Drawing.Size(176, 25)
+        Me.calcPictureBox.TabIndex = 90
+        Me.calcPictureBox.TabStop = False
         '
         'settingsIconPictureBox
         '
@@ -98,7 +184,7 @@ Partial Class mainForm
         Me.settingsIconPictureBox.BackgroundImage = Global.KEROTicketSystem.My.Resources.Resources.Settings_96px
         Me.settingsIconPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.settingsIconPictureBox.Enabled = False
-        Me.settingsIconPictureBox.Location = New System.Drawing.Point(2, 99)
+        Me.settingsIconPictureBox.Location = New System.Drawing.Point(2, 154)
         Me.settingsIconPictureBox.Name = "settingsIconPictureBox"
         Me.settingsIconPictureBox.Size = New System.Drawing.Size(25, 25)
         Me.settingsIconPictureBox.TabIndex = 89
@@ -107,7 +193,7 @@ Partial Class mainForm
         'settingsPictureBox
         '
         Me.settingsPictureBox.BackColor = System.Drawing.Color.White
-        Me.settingsPictureBox.Location = New System.Drawing.Point(2, 99)
+        Me.settingsPictureBox.Location = New System.Drawing.Point(2, 154)
         Me.settingsPictureBox.Name = "settingsPictureBox"
         Me.settingsPictureBox.Size = New System.Drawing.Size(176, 25)
         Me.settingsPictureBox.TabIndex = 87
@@ -193,7 +279,13 @@ Partial Class mainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(150, 192)
+        Me.ClientSize = New System.Drawing.Size(150, 180)
+        Me.Controls.Add(Me.cashCountIconPictureBox)
+        Me.Controls.Add(Me.cashCountLabel)
+        Me.Controls.Add(Me.cashCountPictureBox)
+        Me.Controls.Add(Me.calcIconPictureBox)
+        Me.Controls.Add(Me.calcLabel)
+        Me.Controls.Add(Me.calcPictureBox)
         Me.Controls.Add(Me.settingsIconPictureBox)
         Me.Controls.Add(Me.settingsLabel)
         Me.Controls.Add(Me.settingsPictureBox)
@@ -209,6 +301,10 @@ Partial Class mainForm
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "mainForm"
         Me.Text = " "
+        CType(Me.cashCountIconPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cashCountPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.calcIconPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.calcPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.settingsIconPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.settingsPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.closePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
@@ -272,4 +368,13 @@ Partial Class mainForm
         End If
 
     End Sub
+
+    Friend WithEvents checkTimer As Timer
+    Friend WithEvents flashTimer As Timer
+    Friend WithEvents calcIconPictureBox As PictureBox
+    Friend WithEvents calcLabel As Label
+    Friend WithEvents calcPictureBox As PictureBox
+    Friend WithEvents cashCountIconPictureBox As PictureBox
+    Friend WithEvents cashCountLabel As Label
+    Friend WithEvents cashCountPictureBox As PictureBox
 End Class
