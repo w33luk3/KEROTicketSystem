@@ -12,6 +12,9 @@ Public Class ticketsForm
 
 
     Public connString As String
+    Public selectedTicket As String
+
+    Dim iCount As UInteger
 
     Public Sub New()
 
@@ -29,6 +32,10 @@ Public Class ticketsForm
         GetStatus()
         GetTags()
         GetLastTicket()
+
+        iCount = 0
+        checkTicketsTimer.Enabled = True
+
     End Sub
 
     Private Sub ConnectDatabase()
@@ -198,6 +205,7 @@ Public Class ticketsForm
             '  customerGroupBox.Visible = True
             i = ticketsDataGridView.CurrentRow.Index       'i = dgv row index
 
+            selectedTicket = ticketsDataGridView.Item(0, i).Value.ToString
             '    customerGroupBox.Text = ticketsDataGridView.Item(1, i).Value.ToString             'update labels to match dgv row headers
             '    custAdd1Label.Text = ticketsDataGridView.Item(2, i).Value.ToString             '
             '    custAdd2Label.Text = ticketsDataGridView.Item(3, i).Value.ToString             '
@@ -322,5 +330,23 @@ Public Class ticketsForm
 
     Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
 
+    End Sub
+
+    Private Sub ticketsDataGridView_DoubleClick(sender As Object, e As EventArgs) Handles ticketsDataGridView.DoubleClick
+        Dim EditTicket As New editTicketForm
+        editTicketForm.selectedTicket = selectedTicket
+
+        editTicketForm.Show()
+
+    End Sub
+
+    Private Sub ticketsDataGridView_Click(sender As Object, e As EventArgs) Handles ticketsDataGridView.Click
+        UpdateLabels()
+    End Sub
+
+    Private Sub checkTicketsTimer_Tick(sender As Object, e As EventArgs) Handles checkTicketsTimer.Tick
+        iCount += 1
+
+        Label1.Text = iCount
     End Sub
 End Class

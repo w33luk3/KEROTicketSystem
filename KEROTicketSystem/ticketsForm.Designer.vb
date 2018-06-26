@@ -22,7 +22,8 @@ Partial Class ticketsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.ticketsDataGridView = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
@@ -33,6 +34,7 @@ Partial Class ticketsForm
         Me.tagNameComboBox = New System.Windows.Forms.ComboBox()
         Me.tagIDComboBox = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.checkTicketsTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.ticketsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -62,8 +64,8 @@ Partial Class ticketsForm
         Me.ticketsDataGridView.AllowUserToAddRows = False
         Me.ticketsDataGridView.AllowUserToDeleteRows = False
         Me.ticketsDataGridView.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.ticketsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.ticketsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.ticketsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ticketsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.ticketsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
@@ -156,6 +158,10 @@ Partial Class ticketsForm
         Me.Label1.TabIndex = 58
         Me.Label1.Text = "Label1"
         '
+        'checkTicketsTimer
+        '
+        Me.checkTicketsTimer.Interval = 500
+        '
         'ticketsForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -182,4 +188,5 @@ Partial Class ticketsForm
     Friend WithEvents tagNameComboBox As ComboBox
     Friend WithEvents tagIDComboBox As ComboBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents checkTicketsTimer As Timer
 End Class
